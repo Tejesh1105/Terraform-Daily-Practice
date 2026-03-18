@@ -1,0 +1,122 @@
+🧠 Topic 1: What Terraform REALLY is
+Simple definition:
+
+Terraform is a desired state engine.
+
+You don’t say how to create infra step-by-step.
+
+You say:
+
+“This is how my infrastructure SHOULD look.”
+
+Terraform figures out:
+
+What exists
+
+What needs to change
+
+How to reach the desired state
+
+🏗 Real-world analogy
+
+Think of Terraform like Google Maps:
+
+You give destination → Desired state
+
+Maps calculates route → Execution plan
+
+Shows preview → terraform plan
+
+Starts navigation → terraform apply
+
+Recalculates if wrong turn → Drift correction
+
+⚙️ Topic 2: Terraform Workflow (VERY IMPORTANT)
+1. terraform init
+
+Downloads providers (plugins)
+
+Initializes working directory
+
+👉 Without this → nothing works
+
+2. terraform plan
+
+Compares:
+
+Current state (tfstate)
+
+Desired config (.tf files)
+
+Outputs:
+
+What will be created/updated/destroyed
+
+👉 This is your safety net
+
+3. terraform apply
+
+Executes the plan
+
+Calls provider APIs
+
+4. terraform destroy
+
+Deletes all managed infra
+
+🔍 Internal Working (Important for interviews)
+
+Terraform builds a dependency graph:
+
+Resources are nodes
+
+Dependencies are edges
+
+Then executes in correct order:
+
+Parallel where possible
+
+Sequential where needed
+
+🧾 Topic 3: Your First Terraform Code
+
+We will NOT use cloud yet. First understand behavior locally.
+
+🧱 Write this from scratch:
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+      version = ">= 2.0"
+    }
+  }
+}
+
+provider "local" {}
+
+resource "local_file" "example" {
+  filename = "hello.txt"
+  content  = "Hello, Terraform!"
+}
+💻 CLI Exercise
+
+Run:
+
+terraform init
+terraform plan
+terraform apply
+
+Then check:
+👉 A file hello.txt should be created
+
+🧠 What just happened?
+
+Terraform read config
+
+Compared state (none existed)
+
+Planned creation
+
+Created file
+
+Stored state in terraform.tfstate
