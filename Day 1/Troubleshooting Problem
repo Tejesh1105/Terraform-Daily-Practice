@@ -1,0 +1,50 @@
+Scenario:
+
+You run terraform apply twice.
+
+First run:
+✔ Creates file
+
+Second run:
+✔ Says: “No changes”
+
+Then you manually edit the file content.
+
+Now run terraform plan.
+
+❓ Questions:
+
+What will Terraform detect?
+
+What is this concept called?
+
+How does Terraform know this?
+
+Solution:-
+Terraform compares:
+
+Configuration (.tf)
+
+State file (tfstate)
+
+BUT:
+
+# It also queries the real infrastructure via provider API
+
+Flow:
+
+Reads tfstate
+
+Calls provider → fetch real state
+
+Compares with config
+
+Final Answer:
+
+Detects → drift (file content mismatch)
+
+Concept → Configuration Drift
+
+How:
+
+Terraform refreshes state by querying provider, then compares with config
