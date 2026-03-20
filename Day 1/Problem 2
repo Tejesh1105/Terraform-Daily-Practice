@@ -1,0 +1,10 @@
+Add output:
+
+Print file name after apply
+
+Solution :-
+output "file_name" {
+  value = local_file.my_file.filename
+}
+
+# Output blocks are the correct way to expose values
