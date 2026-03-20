@@ -1,0 +1,14 @@
+Break this code intentionally:
+
+resource "local_file" "bad" {
+  filename = hello.txt
+  content  = "oops"
+}
+
+👉 Fix it and explain WHY it broke
+
+Solution :-
+resource "local_file" "bad" { filename = "hello.txt" content = "oops" } 
+It broke because in terraform(HCL) string should always be quoted.
+So here terraform will treat hello.txt as a reference like a variable, resource or attribute not as a literal string.
+Because of this terraform will throw an error.
