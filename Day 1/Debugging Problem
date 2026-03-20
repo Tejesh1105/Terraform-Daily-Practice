@@ -1,0 +1,42 @@
+You run:
+terraform apply
+Error:
+Error: Provider not installed
+❓ Questions:
+
+Root cause?
+
+Which command fixes it?
+
+Why does this happen internally?
+
+Solution :- 
+1. Root Cause
+Terraform cannot find the required provider plugin in the .terraform directory.
+
+This usually happens when:
+
+You didn’t run terraform init
+
+.terraform/ folder is deleted
+
+New provider added but not initialized
+
+2. Fix Command
+
+terraform init
+
+3. Why This Happens Internally ?
+Terraform reads required_providers
+
+Checks .terraform/plugins
+
+If missing → throws error
+
+* terraform init:
+
+Downloads provider binaries
+
+Stores them locally
+
+Creates .terraform.lock.hcl (dependency lock)
