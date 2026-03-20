@@ -1,0 +1,41 @@
+1.) Difference between plan and apply?
+Solution:- 
+Terraform plan compares current state(tfsate) and desired config(.tf file) while terraform apply executes the plan and calls provider APIs. 
+In simple terms if you want to see what changes will happen before we do "terraform apply", we do terraform plan it gives us a rough idea that what all resources will be added or destroyed.
+
+2.)What is stored in terraform.tfstate?
+Solution:- terraform.tfstate contains:
+
+Resource IDs (real infra mapping)
+
+Attributes (IP, names, metadata)
+
+Dependency data
+
+Provider info
+
+# It is the source of truth mapping config → real world
+
+3.) Why does Terraform need providers?
+Solution:- Providers are what let terraform create and manage real resources by connecting it to external systems.
+
+4.) What happens if state file is deleted?
+Solution:-
+If deleted:
+
+Terraform loses mapping
+
+Thinks nothing exists
+
+Will try to recreate everything
+
+Can cause:
+
+duplicate infra
+
+conflicts
+
+outages
+
+5.) Is Terraform imperative or declarative? Why?
+Solution:- Terraform is declarative because you define the desired end state, and it figures out how to achieve it automatically.
